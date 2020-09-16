@@ -23,4 +23,9 @@
     </div>
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
+<style>
+body {
+    font-family: "Segoe UI", sans-serif;
+}
+</style>
 </html>

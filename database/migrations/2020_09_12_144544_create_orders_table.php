@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->integer('quantity');
             $table->double('revenue');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

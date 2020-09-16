@@ -1,12 +1,7 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.config.productionTip = false
 
 //Vue router
 import VueRouter from 'vue-router';
@@ -16,7 +11,7 @@ const routes = [
     {path:'/agents',component: require('./components/pages/Agents.vue').default},
     {path:'/orders',component: require('./components/pages/Orders.vue').default},
     {path:'/orders/new',component: require('./components/pages/NewOrder.vue').default},
-
+    {path:'/login',component: require('./components/pages/Login.vue').default},
 ]
 const router = new VueRouter({
     routes,
@@ -25,14 +20,28 @@ const router = new VueRouter({
 
 Vue.component('app-main', require('./components/layouts/Default.vue').default);
 
+import swal from 'sweetalert2';
+window.swal = swal;
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+const Toast = swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    background:'#1A202C',
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', swal.stopTimer)
+      toast.addEventListener('mouseleave', swal.resumeTimer)
+    }
+})
+window.toast = Toast;
+
+//Vuex
+import {store} from "./store/store"
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store
 });
